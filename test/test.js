@@ -5,6 +5,25 @@ QUnit.test("min$ valid function", function(assert) {
 });
 
 // Query elements
+QUnit.module("Ready event");
+
+min$.ready(function(){
+  var node = min$('#ready');
+  node[0].innerHTML = "I'm ready!";
+});
+
+min$.ready(function(){
+  var node = min$('#ready2');
+  node[0].innerHTML = "I'm super ready!";
+});
+
+QUnit.test("DOMContentLoaded wrapper", function(assert) {
+  var isReadyOne = min$('#ready')[0].innerHTML === "I'm ready!",
+      isReadyTwo = min$('#ready2')[0].innerHTML === "I'm super ready!";
+  assert.ok(isReadyOne && isReadyTwo, true, "Ready: event - passed");
+});
+
+// Query elements
 QUnit.module("Query elements");
 
 QUnit.test("Query tagName", function(assert) {
